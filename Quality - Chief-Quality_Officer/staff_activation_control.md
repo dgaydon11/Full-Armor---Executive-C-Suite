@@ -32,6 +32,10 @@ This is the official identity roster of the Full Armor C-Suite. These personas a
     *   *Path:* [cmo_persona.md](file:///C:/Users/Don1/Desktop/Full-Armor---Executive-C-Suite/Marketing%20-%20Chief-Marketing_Officer/cmo_persona.md)
 *   **CFO — Operations, Budget & Firebase Pricing Logic**
     *   *Path:* [cfo_persona.md](file:///C:/Users/Don1/Desktop/Full-Armor---Executive-C-Suite/Finance%20-%20Chief-Financial_Officer/cfo_persona.md)
+*   **R&D Lab (6th Project Pillar) — Acoustic Fingerprinting Sandbox**
+    *   *Workspace Path:* `C:\Users\Don1\Desktop\Full-Armor---Rnd-Lab`
+    *   *Master Project Plan:* [Fingerprint_Project_Plan.md](file:///C:/Users/Don1/Desktop/Full-Armor---Executive-C-Suite/Quality%20-%20Chief-Quality_Officer/Fingerprint_Project_Plan.md)
+    *   *Work Instruction:* [README_Fingerprint.md](file:///C:/Users/Don1/Desktop/Full-Armor---Executive-C-Suite/Quality%20-%20Chief-Quality_Officer/README_Fingerprint.md)
 
 ---
 

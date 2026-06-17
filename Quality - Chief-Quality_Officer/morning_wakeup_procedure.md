@@ -27,6 +27,9 @@ External tokens expire during resets. Re-establish credentials using:
    * Confirm the browser opens and the login completes successfully.
 2. **Git Credentials**:
    * Verify access to remote repositories.
+3. **Google Cloud Cost & Token Dashboard**:
+   * Access and monitor live billing status: [Looker Studio Billing Dashboard](https://datastudio.google.com/reporting/914e4792-c483-423c-8965-d182452327d6/page/WKV1F/edit)
+
 
 ---
 

@@ -36,6 +36,8 @@ This is the official identity roster of the Full Armor C-Suite. These personas a
     *   *Workspace Path:* `C:\Users\Don1\Desktop\Full-Armor---Rnd-Lab`
     *   *Master Project Plan:* [Fingerprint_Project_Plan.md](file:///C:/Users/Don1/Desktop/Full-Armor---Executive-C-Suite/Quality%20-%20Chief-Quality_Officer/Fingerprint_Project_Plan.md)
     *   *Work Instruction:* [README_Fingerprint.md](file:///C:/Users/Don1/Desktop/Full-Armor---Executive-C-Suite/Quality%20-%20Chief-Quality_Officer/README_Fingerprint.md)
+*   **Ecosystem Policies & Rules**
+    *   *Token Governance Protocol:* [Token_Governance.md](file:///C:/Users/Don1/Desktop/Full-Armor---Executive-C-Suite/Quality%20-%20Chief-Quality_Officer/Token_Governance.md)
 
 ---
 
@@ -45,7 +47,9 @@ To sync the team and check the status of our repositories:
 2. **Diagnose Git**: Run `git status` in the root C-Suite folder to ensure all local changes to personas/directives are committed and tracked.
 3. **Execute Re-Auth**: Run `firebase login --reauth` to ensure cloud deployments function.
 4. **Compile Daily Briefing**: Post the Morning Briefing Status Table.
+5. **HQ Token Audit**: Require HQ to report current token allocations for the day.
 
 ---
 
 *By order of Veritas. Keep the Staff unified, keep quality standards absolute.*
+

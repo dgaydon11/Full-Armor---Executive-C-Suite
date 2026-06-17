@@ -65,6 +65,7 @@ Before starting daily tasks, the active agent must compile and output the follow
 | **3** | Git Connectivity & Branch | `[PASS / PENDING]` | Active Branch: `xxxx` |
 | **4** | Persona / Directive Sync | `[PASS / PENDING]` | Audit C-Suite files for local changes |
 | **5** | EOD Context Restored | `[PASS / PENDING]` | Read last EOD report |
+| **6** | Token & CAPA Audit | `[PASS / PENDING]` | Verify `Token_Governance.md` and check `yellow_light_capa_log.md` |
 
 ---
 

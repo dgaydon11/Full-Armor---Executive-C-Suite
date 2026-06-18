@@ -39,6 +39,7 @@ This is the official identity roster of the Full Armor C-Suite. These personas a
 *   **Ecosystem Policies & Rules**
     *   *Token Governance Protocol:* [Token_Governance.md](file:///C:/Users/Don1/Desktop/Full-Armor---Executive-C-Suite/Quality%20-%20Chief-Quality_Officer/Token_Governance.md)
     *   *Virtual Directory Directive:* [cqo-directive-firestore-virtual-directory.md](file:///C:/Users/Don1/Desktop/Full-Armor---Executive-C-Suite/Quality%20-%20Chief-Quality_Officer/directives/cqo-directive-firestore-virtual-directory.md)
+    *   *Master Whiteboard:* [whiteboard.md](file:///C:/Users/Don1/Desktop/Full-Armor---Executive-C-Suite/Quality%20-%20Chief-Quality_Officer/whiteboard.md)
 
 ---
 

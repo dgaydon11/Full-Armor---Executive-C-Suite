@@ -29,6 +29,11 @@ This file serves as the master repository for brainstorming, system ideas, and f
     *   *Status:* Proposed/Planned
     *   *Concept:* Build a silent, background-only task tracker in Firestore projects collection to manage concurrent multi-agent code execution.
 
+*   **Implement 3D Vocalist Stage Avatar Experience (Titan)**
+    *   *Pillar:* Titan
+    *   *Status:* Proposed/Planned
+    *   *Concept:* Plan and design a 3D stage experience inside the Titan Vault. Let users configure/dress an avatar representing the song's creator, animate the avatar walking onto a virtual stage with a band in the background, and transition the camera perspective to a first-person view of the cheering crowd.
+
 ---
 
 ## 📌 ARCHIVED / COMPLETED IDEAS

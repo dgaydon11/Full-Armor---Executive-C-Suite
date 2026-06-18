@@ -34,6 +34,16 @@ This file serves as the master repository for brainstorming, system ideas, and f
     *   *Status:* Proposed/Planned
     *   *Concept:* Plan and design a 3D stage experience inside the Titan Vault. Let users configure/dress an avatar representing the song's creator, animate the avatar walking onto a virtual stage with a band in the background, and transition the camera perspective to a first-person view of the cheering crowd.
 
+*   **Audit Top 10 Bot Vulnerabilities (Sentinel/Ecosystem)**
+    *   *Pillar:* Sentinel / CISO
+    *   *Status:* Proposed/Planned
+    *   *Concept:* Conduct a security threat audit comparing our active web systems against the Top 10 web vulnerabilities exploited by bot attacks, identifying potential exposure points and drafting mitigation strategies (such as rate limits and App Check integration).
+
+*   **Design 'Guardian Shield' Marketing Campaign for DAW Creators (CMO)**
+    *   *Pillar:* Marketing / CMO
+    *   *Status:* Proposed/Planned
+    *   *Concept:* Develop promotional copy and landing page layouts targeting home DAW producers. Highlight our unique combination of 3D visualizers, automated digital signature notarization, active web crawling detection, and automated government copyright filing (emphasizing the $150,000 statutory damages protection).
+
 ---
 
 ## 📌 ARCHIVED / COMPLETED IDEAS

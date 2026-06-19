@@ -67,6 +67,7 @@ Before starting daily tasks, the active agent must compile and output the follow
 | **5** | EOD Context Restored | `[PASS / PENDING]` | Read last EOD report |
 | **6** | Token & CAPA Audit | `[PASS / PENDING]` | Verify `Token_Governance.md` and check `yellow_light_capa_log.md` |
 | **7** | Executive Staff Report-Outs | `[PASS / PENDING]` | Compile morning reports from each active department |
+| **8** | SPC Metric Deck | `[PASS / PENDING]` | Verify metrics match green thresholds |
 
 ---
 
@@ -80,6 +81,53 @@ To ensure complete alignment and multi-disciplinary validation, the morning brie
 5.  **CLO — Legal Compliance & Governance:** Statutory copyright compliance, digital signatures notarization status, and licensing agreements checks.
 6.  **CMO — Brand Guidelines & Presentation:** Brand guidelines adherence, interface copy status, and user-experience visual alignment.
 7.  **CFO (Vance Ledger) — Operations & Token Budgeting:** Token daily spend updates, cost control gate alerts, and token budgeting compliance reports.
+
+---
+
+## SECTION 7: STATISTICAL PROCESS CONTROL (SPC) METRICS & THRESHOLDS
+Every morning report must evaluate and display the control light status (🟢/🟡/🔴) for each executive's core operational metrics:
+
+### 1. CQO (Veritas) — Test Suite Pass Rate
+*   **Metric:** Percentage of successful E2E Playwright tests and core R&D DSP math verification tests.
+*   **🟢 GREEN:** 100% test pass rate.
+*   **🟡 YELLOW:** 90% – 99% test pass rate.
+*   **🔴 RED:** < 90% test pass rate OR any compiler crash.
+
+### 2. CTO — API Response Latency
+*   **Metric:** API Gateway route loading latency and endpoint error rate.
+*   **🟢 GREEN:** Latency < 200ms AND Error rate < 1%.
+*   **🟡 YELLOW:** Latency 200ms – 500ms OR Error rate 1% – 5%.
+*   **🔴 RED:** Latency > 500ms OR Error rate > 5%.
+
+### 3. CISO — Perimeter Security Compliance
+*   **Metric:** Blocked unauthorized access logs and CORS/CSP compliance count.
+*   **🟢 GREEN:** 0 unauthorized access attempts AND 100% CSP/CORS compliance.
+*   **🟡 YELLOW:** 1 – 5 blocked attempts OR minor CSP configuration mismatch.
+*   **🔴 RED:** > 5 blocked attempts OR any leaked credential / major CSP block.
+
+### 4. CSO — DSP Peak Constellation Hashing Density
+*   **Metric:** Average number of generated constellation pairs per 2.0-second audio track.
+*   **🟢 GREEN:** 30 – 150 pairs (valid, robust fingerprint profile).
+*   **🟡 YELLOW:** 10 – 29 pairs OR 151 – 200 pairs.
+*   **🔴 RED:** < 10 pairs (insufficient keys) OR > 200 pairs (extreme noise/overhead).
+
+### 5. CLO — Signed URL Expiration Duration
+*   **Metric:** Configuration setting check of the maximum time-to-live (TTL) for temporary stem downloads.
+*   **🟢 GREEN:** Maximum TTL is exactly 15 minutes.
+*   **🟡 YELLOW:** Maximum TTL set between 15 and 30 minutes.
+*   **🔴 RED:** Maximum TTL > 30 minutes.
+
+### 6. CMO — Visual Presentation & Branding Adherence
+*   **Metric:** Rendering alignment check of visual banners and brand interface controls.
+*   **🟢 GREEN:** 100% compliance with corporate brand assets and fallback layouts.
+*   **🟡 YELLOW:** Minor stylesheet fallback engaged or CSS layout shifts detected.
+*   **🔴 RED:** Core branding asset missing OR layout is broken/unreadable.
+
+### 7. CFO (Vance Ledger) — Daily Token Spend Ratio
+*   **Metric:** Incremental cost accumulation compared to the daily limit of $5.00.
+*   **🟢 GREEN:** Total spend is < 80% of limit ($0.00 – $4.00).
+*   **🟡 YELLOW:** Total spend is 80% – 100% of limit ($4.00 – $5.00).
+*   **🔴 RED:** Total spend is $\ge$ 100% of limit ($5.00+).
 
 ---
 

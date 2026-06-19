@@ -66,6 +66,20 @@ Before starting daily tasks, the active agent must compile and output the follow
 | **4** | Persona / Directive Sync | `[PASS / PENDING]` | Audit C-Suite files for local changes |
 | **5** | EOD Context Restored | `[PASS / PENDING]` | Read last EOD report |
 | **6** | Token & CAPA Audit | `[PASS / PENDING]` | Verify `Token_Governance.md` and check `yellow_light_capa_log.md` |
+| **7** | Executive Staff Report-Outs | `[PASS / PENDING]` | Compile morning reports from each active department |
+
+---
+
+## SECTION 6: EXECUTIVE STAFF REPORT-OUT REQUIREMENTS
+To ensure complete alignment and multi-disciplinary validation, the morning briefing must contain a concise report-out from each executive officer detailing their domain's status, recent changes, and outstanding directives:
+
+1.  **CQO (Veritas) — Process & Quality Oversight:** State of quality gates, test suite runs (Playwright and R&D DSP math), Firestore/GCS rules compliance status, and any active CAPA items.
+2.  **CTO — Systems & Technical Architecture:** Status of database collection schemas, API Gateway integrations, and system scalability reviews.
+3.  **CISO — Information Security & Secret Isolation:** Security perimeter status (CSP headers, GCS CORS settings, App Check policies) and credential hygiene checks.
+4.  **CSO — Acoustics & Audio Engineering:** Audio fingerprinting tools accuracy, watermarker configurations, and DSP catalog updates.
+5.  **CLO — Legal Compliance & Governance:** Statutory copyright compliance, digital signatures notarization status, and licensing agreements checks.
+6.  **CMO — Brand Guidelines & Presentation:** Brand guidelines adherence, interface copy status, and user-experience visual alignment.
+7.  **CFO (Vance Ledger) — Operations & Token Budgeting:** Token daily spend updates, cost control gate alerts, and token budgeting compliance reports.
 
 ---
 

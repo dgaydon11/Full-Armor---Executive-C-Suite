@@ -68,6 +68,7 @@ Before starting daily tasks, the active agent must compile and output the follow
 | **6** | Token & CAPA Audit | `[PASS / PENDING]` | Verify `Token_Governance.md` and check `yellow_light_capa_log.md` |
 | **7** | Executive Staff Report-Outs | `[PASS / PENDING]` | Compile morning reports from each active department |
 | **8** | SPC Metric Deck | `[PASS / PENDING]` | Verify metrics match green thresholds |
+| **9** | Daily Stress Test Selection | `[PASS / PENDING]` | Identify the scheduled department stress test for the day |
 
 ---
 
@@ -128,6 +129,24 @@ Every morning report must evaluate and display the control light status (🟢/�
 *   **🟢 GREEN:** Total spend is < 80% of limit ($0.00 – $4.00).
 *   **🟡 YELLOW:** Total spend is 80% – 100% of limit ($4.00 – $5.00).
 *   **🔴 RED:** Total spend is $\ge$ 100% of limit ($5.00+).
+
+---
+
+## SECTION 8: DAILY EXECUTIVE STRESS TEST ROTATION SCHEDULE
+To maintain active system resilience, the morning briefing must schedule exactly **one non-destructive, reversible stress test per day** targeting a specific executive area. The test will remain staged in the briefing and will **only be executed on the Operator's explicit command**:
+
+*   **Monday:** **CQO (Veritas) Stress Test** — Deploy a minor CSS regression in Vanguard to drop E2E pass rate to 95%.
+*   **Tuesday:** **CTO Stress Test** — Inject simulated response latency (350ms) to verify gateway alerts.
+*   **Wednesday:** **CISO Stress Test** — Run a mock IDOR/XSS payload test to verify security rules and CSP blocking behavior.
+*   **Thursday:** **CSO Stress Test** — Ingest a low-fidelity silence-padded audio track to verify hash density limits.
+*   **Friday:** **CLO Stress Test** — Temporarily scale up Signed URL TTL values to 20 minutes to verify duration alerting.
+*   **Saturday:** **CMO Stress Test** — Hide core visual branding assets in Vanguard to verify fallback rendering.
+*   **Sunday:** **CFO Stress Test** — Run simulated API cost accumulation scripts to verify spend gate alerts.
+
+**Execution Protocol:**
+1.  Verify the scheduled department for the day during the wakeup procedure.
+2.  Upon the Operator's command, trigger the simulated breach or parameter boundary shift to push the metric into the **🟡 YELLOW** zone.
+3.  Report the alert state, then execute the documented rollback procedure to return the control status back to **`🟢 GREEN`**.
 
 ---
 

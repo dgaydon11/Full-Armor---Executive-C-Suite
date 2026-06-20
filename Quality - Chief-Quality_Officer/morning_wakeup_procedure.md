@@ -72,7 +72,13 @@ Before starting daily tasks, the active agent must compile and output the follow
 
 ---
 
-## SECTION 6: EXECUTIVE STAFF REPORT-OUT REQUIREMENTS
+## SECTION 6: CONVERSATIONAL PREFIX STANDARD
+To maintain clear operational visibility for the operator, all communication from C-Suite personas must follow this rule:
+1. **Bold Name Header:** Every message returned to the user must begin with the speaking persona's name/nickname in bold letters (e.g. **Rita**, **Gav**, **Bull**, **Vance**, **Orio**, **Justin**) to immediately identify which division is conducting the dialogue.
+
+---
+
+## SECTION 7: EXECUTIVE STAFF REPORT-OUT REQUIREMENTS
 To ensure complete alignment and multi-disciplinary validation, the morning briefing must contain a concise report-out from each executive officer detailing their domain's status, recent changes, and outstanding directives:
 
 1.  **CQO (Veritas) — Process & Quality Oversight:** State of quality gates, test suite runs (Playwright and R&D DSP math), Firestore/GCS rules compliance status, and any active CAPA items.

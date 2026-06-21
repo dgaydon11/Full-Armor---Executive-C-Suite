@@ -11,6 +11,7 @@ This log serves as the ISO 9001:2026 record for tracking and resolving all **Yel
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | *Example Row* | *R&D* | *2nd attempt on FFT loop* | *Flash* | *Simplified matching algorithm to reduce iterations* | *Closed* |
 | 2026-06-19 14:50:00 | Vanguard | Unauthorized script 'mock-unauthorized-tracker.com/api.js' blocked by CSP | Flash | Isolated script injection stress test; cleaned up script tag from source | Closed |
+| 2026-06-20 21:31:00 | Vanguard | Google sign-in fails with auth/internal-error & redirect loop | Pro | Under investigation using 5 Whys/Fishbone; checking console config | Open |
 
 ---
 

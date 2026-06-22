@@ -1,11 +1,9 @@
 {
-  "date": "2026-06-18",
-  "totalCostUsd": 0.006750000000000001,
+  "date": "2026-06-21",
+  "totalCostUsd": 0,
   "modelCalls": {
-    "gemini-2.5-flash": 2,
+    "gemini-2.5-flash": 1,
     "gemini-2.5-pro": 0
   },
-  "attempts": {
-    "Test Diagnostics": 1
-  }
+  "attempts": {}
 }

@@ -49,6 +49,12 @@ This file serves as the master repository for brainstorming, system ideas, and f
     *   *Status:* Proposed/Planned
     *   *Concept:* Develop a lightweight, standalone "Sentry" binary acting as a secure relay between mobile devices and the local Anti-Gravity environment. Features cryptographic device-specific handshakes to push commands to `HQ` for Veritas to process, native Jetpack Compose UI, local voice-to-intent pipeline (Whisper STT) with barge-in support, verbal shortcut command library, and ISO 9001 audit trails of all mobile interactions.
 
+*   **Z Fold7 Mobile Layout Optimization (Sentry)**
+    *   *Pillar:* R&D / Design
+    *   *Status:* Proposed/Planned
+    *   *Concept:* Implement responsive layout scaling, fluid grid systems, compressed status header, content-first typography, and viewport height prioritization (80-90% conversation display) to maximize the reading workspace when unfolded on Z Fold7 devices.
+
+
 ---
 
 ## 📌 ARCHIVED / COMPLETED IDEAS

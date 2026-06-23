@@ -9,11 +9,6 @@ This file serves as the master repository for brainstorming, system ideas, and f
 
 ## 💡 ACTIVE IDEAS & BACKLOG
 
-*   **Implement Standalone R&D Lab (Pillar 6)**
-    *   *Pillar:* R&D
-    *   *Status:* Proposed/Planned
-    *   *Concept:* Set up local `Full-Armor---Rnd-Lab` workspace directory and configure isolated `full-armor-rnd-sandbox` Firestore on the Spark plan.
-
 *   **Acoustic Fingerprinting Tool (Phase 2)**
     *   *Pillar:* R&D
     *   *Status:* Proposed/Planned
@@ -48,6 +43,11 @@ This file serves as the master repository for brainstorming, system ideas, and f
 ---
 
 ## 📌 ARCHIVED / COMPLETED IDEAS
+
+*   **Implement Standalone R&D Lab (Pillar 6)**
+    *   *Pillar:* R&D
+    *   *Status:* Completed (2026-06-22)
+    *   *Concept:* Set up local `Full-Armor---Rnd-Lab` workspace directory and configure isolated `full-armor-rnd-sandbox` Firestore on the Spark plan.
 
 *   **Communication App Bridge**
     *   *Pillar:* Executive C-Suite

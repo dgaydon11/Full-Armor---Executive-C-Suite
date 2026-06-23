@@ -9,6 +9,11 @@ This file serves as the master repository for brainstorming, system ideas, and f
 
 ## 💡 ACTIVE IDEAS & BACKLOG
 
+*   **Reaper DAW Automation & Lossless Compliance Pipeline (Ecosystem)**
+    *   *Pillar:* R&D / Audio
+    *   *Status:* Proposed/Planned
+    *   *Concept:* Automate track stem exports in Reaper as uncompressed WAV files, perform quality and compliance audits (sample rate, bit depth, headroom) using a folder watcher, and auto-upload stems to Firebase Storage.
+
 *   **[Voice Feedback] Test Page (Ticket: LxpWcrqA2nLFg4y2Osri)**
     *   *Pillar:* Voice Feedback
     *   *Status:* Pending

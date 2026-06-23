@@ -9,6 +9,22 @@ This file serves as the master repository for brainstorming, system ideas, and f
 
 ## 💡 ACTIVE IDEAS & BACKLOG
 
+*   **[Voice Feedback] Test Page (Ticket: LxpWcrqA2nLFg4y2Osri)**
+    *   *Pillar:* Voice Feedback
+    *   *Status:* Pending
+    *   *Concept:* Welcome to Full Armor.
+
+*   **Implement Floating Voice Feedback Widget (Ecosystem)**
+    *   *Pillar:* Executive C-Suite / Design / R&D
+    *   *Status:* Proposed/Planned
+    *   *Concept:* Build a global floating microphone button present on all portal pages. Records user feedback using the Web Audio API, auto-transcribes the audio via Gemini, and registers a ticket directly in our Firestore ticketing database.
+
+*   **Sentry Cellular Bridge (R&D)**
+    *   *Pillar:* R&D / Security
+    *   *Status:* Proposed/Planned (Ready for Morning Staff Review)
+    *   *Concept:* Create a secondary cellular-based communication relay app client that queries cellular network metadata (MCC, MNC, LAC, CID, Signal Strength) using the Android TelephonyManager and sends this telemetry alongside voice commands.
+
+
 *   **Acoustic Fingerprinting Tool (Phase 2)**
     *   *Pillar:* R&D
     *   *Status:* Proposed/Planned

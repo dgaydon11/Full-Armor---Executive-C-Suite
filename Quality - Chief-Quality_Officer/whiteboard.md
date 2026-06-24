@@ -9,6 +9,11 @@ This file serves as the master repository for brainstorming, system ideas, and f
 
 ## 💡 ACTIVE IDEAS & BACKLOG
 
+*   **Mandatory Customer 2FA/MFA Strategy Discussion (Executive C-Suite)**
+    *   *Pillar:* Security / CISO / Product
+    *   *Status:* Proposed/Planned (Queued for Morning Meeting Review)
+    *   *Concept:* Reevaluate enforcing dual authentication/2FA for customer web logins, balancing security (CISO) and legal protections (CLO) against signup conversion rates (CMO) and SMS billing costs (CFO) using a hybrid or Passkey solution.
+
 *   **Reaper DAW Automation & Lossless Compliance Pipeline (Ecosystem)**
     *   *Pillar:* R&D / Audio
     *   *Status:* Proposed/Planned

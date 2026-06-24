@@ -1,9 +1,11 @@
 {
-  "date": "2026-06-21",
-  "totalCostUsd": 0,
+  "date": "2026-06-23",
+  "totalCostUsd": 0.0045000000000000005,
   "modelCalls": {
     "gemini-2.5-flash": 1,
     "gemini-2.5-pro": 0
   },
-  "attempts": {}
+  "attempts": {
+    "[Voice Feedback] Test Page": 1
+  }
 }

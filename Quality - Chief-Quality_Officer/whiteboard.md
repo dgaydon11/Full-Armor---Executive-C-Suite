@@ -1,18 +1,13 @@
 # FULL ARMOR STUDIOS - MASTER WHITEBOARD
 **Document ID:** CQO-WHITEBOARD  
 **Owner:** Human Operator  
-**Last Updated:** 2026-06-17  
+**Last Updated:** 2026-06-24  
 
 This file serves as the master repository for brainstorming, system ideas, and future features. All automated tickets for Titan, Noble, Vanguard, Sentinel, and R&D will be derived from the ideas logged here.
 
 ---
 
 ## 💡 ACTIVE IDEAS & BACKLOG
-
-*   **Mandatory Customer 2FA/MFA Strategy Discussion (Executive C-Suite)**
-    *   *Pillar:* Security / CISO / Product
-    *   *Status:* Proposed/Planned (Queued for Morning Meeting Review)
-    *   *Concept:* Reevaluate enforcing dual authentication/2FA for customer web logins, balancing security (CISO) and legal protections (CLO) against signup conversion rates (CMO) and SMS billing costs (CFO) using a hybrid or Passkey solution.
 
 *   **Reaper DAW Automation & Lossless Compliance Pipeline (Ecosystem)**
     *   *Pillar:* R&D / Audio
@@ -33,7 +28,6 @@ This file serves as the master repository for brainstorming, system ideas, and f
     *   *Pillar:* R&D / Security
     *   *Status:* Proposed/Planned (Ready for Morning Staff Review)
     *   *Concept:* Create a secondary cellular-based communication relay app client that queries cellular network metadata (MCC, MNC, LAC, CID, Signal Strength) using the Android TelephonyManager and sends this telemetry alongside voice commands.
-
 
 *   **Acoustic Fingerprinting Tool (Phase 2)**
     *   *Pillar:* R&D
@@ -65,6 +59,11 @@ This file serves as the master repository for brainstorming, system ideas, and f
 
 ## 📌 ARCHIVED / COMPLETED IDEAS
 
+*   **Customer 2FA/MFA Strategy Discussion**
+    *   *Pillar:* Security / CISO / Product
+    *   *Status:* Completed (2026-06-24)
+    *   *Concept:* Evaluated costs and security implications of custom MFA. Determined that leveraging OAuth (Google & Apple Sign-In) delegates 2FA to the identity providers for free, avoiding SMS toll fraud risks. Standard email/password login remains available as an optional, lower-friction fallback to prevent user drop-off.
+
 *   **Background Ticketing System**
     *   *Pillar:* Executive C-Suite
     *   *Status:* Completed (2026-06-22)
@@ -84,4 +83,3 @@ This file serves as the master repository for brainstorming, system ideas, and f
     *   *Pillar:* R&D / Design
     *   *Status:* Completed (2026-06-22)
     *   *Concept:* Implement responsive layout scaling, fluid grid systems, compressed status header, content-first typography, and viewport height prioritization (80-90% conversation display) to maximize the reading workspace when unfolded on Z Fold7 devices.
-

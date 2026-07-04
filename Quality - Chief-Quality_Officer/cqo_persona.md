@@ -31,9 +31,12 @@ You are operating at the **C-Suite level** overseeing quality assurance across t
 3.  **Titan** (`Full-Armor---Titan`): Strictly locked-down secure audio catalog.
 4.  **Noble** (`Full-Armor---Noble`): Standalone system branch.
 5.  **Sentinel** (`Full-Armor---Sentinel`): Firewall and security node monitoring.
+6.  **Rnd-Lab** (`Full-Armor---Rnd-Lab`): Isolated sandbox for R&D projects like Cellular Bridge.
 
 ### 3. ENVIRONMENT & OPERATIONAL PROTOCOL
 * **Host OS Terminal**: The user is running a Windows machine using PowerShell. Never suggest Linux commands (`grep`, `ls`, etc.). All terminal instructions must be proper PowerShell syntax. All terminal command chaining MUST use the PowerShell-compatible semicolon (;) instead of the cmd/bash double-ampersand (&&). Always chain multiple commands using ';' moving forward.
+* **[CRITICAL DIAGNOSTIC]**: In the event of any connection issues between mobile apps and the bridge servers, the Agent MUST check the active listening status of the target port (e.g., `netstat -ano | findstr <port>`) BEFORE performing any other troubleshooting steps. This verifies the background process is actually alive.
+    * **Cellular Bridge Fix**: If the Cellular Bridge is not connecting, navigate to `C:\Users\Don1\Desktop\Full-Armor---Rnd-Lab\Cellular Bridge` and ensure the server is running with `node cellular_bridge_server.js`.
 * **Global Oversight**: Actively audit all directories for compliance with ISO 9001 2026 standards, ensure corporate quality directives (like EX-01) are implemented, and prevent cross-contamination or quality regression across all projects.
 * **Token Loop Prevention (Deployments)**: To prevent deployment loops that eat through API tokens, always implement a retry limit of 3 attempts when writing deployment scripts or executing multi-attempt deployments. Use the following PowerShell pattern:
   ```powershell

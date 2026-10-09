@@ -16,7 +16,7 @@ To ensure safe, automated code execution without manual overhead, operations are
     *   *Reporting:* Silent logging of token metrics to local tracking storage. Zero chat noise.
 *   **🟡 YELLOW LIGHT (Staff Review Gate | 80-100% of budget OR 2nd loop attempt):**
     *   *Action:* Non-blocking alert printed in chat. Coding continues while the Staff (CFO/CISO) reviews logs and adjusts task allocations.
-    *   *Compliance:* **All Yellow Light events must be logged in [yellow_light_capa_log.md](file:///C:/Users/Don1/Desktop/Full-Armor---Executive-C-Suite/Quality%20-%20Chief-Quality_Officer/yellow_light_capa_log.md) along with the documented corrective action.**
+    *   *Compliance:* **All Yellow Light events must be logged in [yellow_light_capa_log.md](file:///C:/Users/dgayd/Desktop/Full-Armor---Executive-C-Suite/Quality%20-%20Chief-Quality_Officer/yellow_light_capa_log.md) along with the documented corrective action.**
 *   **🔴 RED LIGHT (Circuit Breaker | 100%+ of budget OR 3rd loop attempt):**
     *   *Action:* **All programming dispatches stop immediately.** The system locks down and prompts the Human Operator for a manual override.
 

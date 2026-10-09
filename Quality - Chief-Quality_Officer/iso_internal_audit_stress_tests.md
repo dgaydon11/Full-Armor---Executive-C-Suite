@@ -19,7 +19,7 @@ To ensure platform resilience, data integrity, and compliance under stress, each
     *   No production data deletion or corruption.
     *   Reversibility is fully guaranteed via a staged rollback script or procedure.
 3.  **Execution:** The simulation is triggered to force the target metric into the **🟡 YELLOW** boundary.
-4.  **Logging:** The resulting alert must be logged in the **Corrective and Preventive Action (CAPA) Log** ([yellow_light_capa_log.md](file:///c:/Users/Don1/Desktop/Full-Armor---Executive-C-Suite/Quality%20-%20Chief-Quality_Officer/yellow_light_capa_log.md)).
+4.  **Logging:** The resulting alert must be logged in the **Corrective and Preventive Action (CAPA) Log** ([yellow_light_capa_log.md](file:///c:/Users/dgayd/Desktop/Full-Armor---Executive-C-Suite/Quality%20-%20Chief-Quality_Officer/yellow_light_capa_log.md)).
 5.  **Rollback:** The system is restored to its Green state, and the CAPA status is marked as **Closed**.
 
 ---

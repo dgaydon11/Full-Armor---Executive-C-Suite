@@ -1,5 +1,5 @@
 # QMS Controlled Log: Quality Policy Agent Sign-offs
-**Policy Reference:** [Quality Policy Rev C](file:///c:/Users/Don1/Desktop/Full-Armor---Executive-C-Suite/Quality%20-%20Chief-Quality_Officer/quality_policy_rev_c.md)  
+**Policy Reference:** [Quality Policy Rev C](file:///c:/Users/dgayd/Desktop/Full-Armor---Executive-C-Suite/Quality%20-%20Chief-Quality_Officer/quality_policy_rev_c.md)  
 **Status:** ACTIVE & BINDING  
 
 The C-Suite Executive Agents have evaluated their systems, code constraints, and active operational procedures against Quality Policy Revision C. By recording their digital signatures below, each Chief guarantees compliance within their respective domains.

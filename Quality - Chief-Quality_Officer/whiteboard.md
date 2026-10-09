@@ -1,13 +1,32 @@
 # FULL ARMOR STUDIOS - MASTER WHITEBOARD
 **Document ID:** CQO-WHITEBOARD  
 **Owner:** Human Operator  
-**Last Updated:** 2026-06-24  
+**Last Updated:** 2026-10-08  
 
 This file serves as the master repository for brainstorming, system ideas, and future features. All automated tickets for Titan, Noble, Vanguard, Sentinel, and R&D will be derived from the ideas logged here.
 
 ---
 
 ## 💡 ACTIVE IDEAS & BACKLOG
+
+*   **P0 — Restore Vanguard Access (Portal Locked) (Ticket: CQO-CAPA-0620)**
+    *   *Pillar:* Vanguard / CTO
+    *   *Status:* Tomorrow AM — Priority
+    *   *Concept:* Operator must regain access to the Vanguard Pillar ASAP (Google sign-in fails with `auth/internal-error` + redirect loop). First action of the morning: run the CAPA-0620 diagnostics (browser Network tab for `CONFIGURATION_NOT_FOUND` / `OPERATION_NOT_ALLOWED` / `API_KEY_HTTP_REFERRER_BLOCKED`; verify Google provider Enabled and the authorized domains in the Firebase Console), then apply the 5S auth-routing cleanup and validate in the emulator before deploying.
+
+*   **Review ALL CAPA Tickets (Open & Closed) (Ticket: CQO-CAPA-1008)**
+    *   *Pillar:* CQO / Quality Management System
+    *   *Status:* Pending
+    *   *Concept:* Full review of every ticket in the local QA Corrective Action (CAPA) system — reconcile status drift between the `capa_*.md` reports and `yellow_light_capa_log.md`, re-assess the open Vanguard auth loop (CQO-CAPA-0620), and flag stale or unowned items.
+
+*   **[DISCUSSION] Transitioning the Executive Staff into the opencode Environment**
+    *   *Pillar:* Executive C-Suite / HQ
+    *   *Status:* Discussion — Resume Here (Parked 2026-10-08, no files drafted yet)
+    *   *Concept:* Planned migration of the C-Suite Staff (currently living as chat personas in Open Web UI) into native opencode agents. **Decision:** YES — opencode supports custom agents as simple `.md` files (project `.opencode/agent/<name>.md` or global `~/.config/opencode/agent/<name>.md`), with frontmatter for `description`, `mode` (primary/subagent/all), `model`, and `permission`.
+    *   *Key Design Decision (proposed, unapproved):* Honor the governance already baked into every persona file (executives issue only "WHAT" to HQ; mandatory Human Operator sign-off; `.md` revision lock; Identity Sovereignty). Mapping: **(1) Chiefs** → `subagent`, read-only planners (`edit: deny`, `write: deny`, `bash: ask`); **(2) HQ Manager / Script Writer** → `primary`, full tools, turns directives into tasks ("HOW"); **(3) Pillar bots** (Titan/Noble/Vanguard/Sentinel) → `subagent`, the only write-capable agents. Enforce revision lock + sign-off via `permission: { edit: { "**/*.md": "ask", "*": "allow" } }` (opencode = last matching rule wins).
+    *   *Open Questions / Gotchas:* (a) Open Web UI Staff and opencode agents are separate model instances — no shared memory; the only bridge is the `__inbox__` file drop, which is a one-way Open Web UI sandbox (`webui.db` + 185 uploaded images), NOT a live message bus. (b) Hierarchy is Chief→HQ, the reverse of opencode's primary→subagent dispatch — so HQ should be `primary` and consults Chiefs as `subagent` reports. (c) Keep single source of truth: agent bodies should *Read* the existing `<x>_persona.md` at startup (like SOP-01) rather than copy persona text (avoids drift + honors the revision lock). (d) Config is not hot-reloaded — restart opencode after adding agents. (e) `agents.py` is named as the single source of truth for staff capabilities in `open_web_ui_prompt_writer.md` — verify it before building.
+    *   *Relevant Files:* all 7 `*_persona.md` under `Full-Armor---Executive-C-Suite\<Dept> - ...\`; `Open_Web_UI_Front_End\open_web_ui_prompt_writer.md`; `Quality - Chief-Quality_Officer\staff_activation_control.md`; `Full-Armor---HQ\__inbox__\`.
+    *   *Next Step When Resumed:* Decide scope — start with a proof-of-concept (`/good-morning` + CQO/Veritas since she leads) vs. full 7-Chief + HQ + Pillar set — then draft the agent `.md` files and restart opencode.
 
 *   **Reaper DAW Automation & Lossless Compliance Pipeline (Ecosystem)**
     *   *Pillar:* R&D / Audio
@@ -56,6 +75,47 @@ This file serves as the master repository for brainstorming, system ideas, and f
 
 
 ---
+
+## 🚧 LOOSE ENDS & OPERATIONAL STATE
+*As of 2026-10-08 EOD. Captured so tomorrow's session resumes cleanly — these are discovered defects / pending state, NOT yet ticketed in the CAPA system (triage → CQO-CAPA when resumed).*
+
+*   **Vanguard — Today's Fixes NOT Yet Committed/Deployed.**
+    *   *Pillar:* Vanguard / CTO
+    *   *Status:* Uncommitted (pairs with P0 / CQO-CAPA-0620)
+    *   *Detail:* CP1252 mojibake + BOM cleanup in `index.html`, `vanguard_terminal.html`, `guitar_interior.html`, and the broken-JS repair at `index.html:289` are saved but not committed. Verify in the emulator, then commit + deploy.
+
+*   **Full-Armor Folder-Root Path Defects (SOP-01 & inbox).**
+    *   *Pillar:* HQ / CQO
+    *   *Status:* Open
+    *   *Detail:* `morning_wakeup_procedure.md` lists dirs under `...\Desktop\Full-Armor---X`, but they actually live under `...\Desktop\full-armor-personal-project\Full-Armor---X`; `Full-Armor---Rnd-Lab` should be `Full-Armor---R&D-Lab (3D stage avatar)`. Fix these references so wakeup + inbox routing is correct.
+
+*   **`sentry_bridge.js` Mirrors to a Stale Whiteboard Path.**
+    *   *Pillar:* HQ / Sentinel
+    *   *Status:* Open
+    *   *Detail:* ~line 669 uses a mirror path missing the `full-armor-personal-project\` root (the mirror step would fail); the bridge also references a nonexistent `task_queue.js`.
+
+*   **Firestore `tickets` Rule Missing.**
+    *   *Pillar:* CISO / Vanguard
+    *   *Status:* Open (prerequisite for the floating voice-feedback widget)
+    *   *Detail:* `Full-Armor---HQ\firestore.rules` has no rule for the `tickets` collection written by the voice-feedback widget. Add before that feature goes live.
+
+*   **Leftover File Decision: `titan_Portal_2\Carolina Dreamin V3 Save.mp3`.**
+    *   *Pillar:* Titan / CSO
+    *   *Status:* Pending decision
+    *   *Detail:* 7 MB file predating the WAV uploads. Confirm whether to keep, rename, or remove.
+
+*   **Ops Note — gcloud / gsutil Auth Workaround (NOT a bug to fix blindly).**
+    *   *Pillar:* HQ
+    *   *Status:* Documented
+    *   *Detail:* gcloud holds the wrong account (`don.gaydon@dgcustomphotography.com`) and cannot refresh non-interactively. Correct account is `dgaydon11@gmail.com`. Workaround: mint an access token from the Firebase CLI refresh token in `~/.config/configstore/firebase-tools.json`, set `$env:CLOUDSDK_AUTH_ACCESS_TOKEN`, then run `gcloud storage ...` (token ~1h).
+
+*   **Morning Routine — Register the new `/good-morning` command.**
+    *   *Pillar:* HQ / CQO
+    *   *Status:* Pending restart
+    *   *Detail:* The new global command (`~/.config/opencode/command/good-morning.md`) only appears after an opencode restart. Until then, trigger the routine by saying "Good morning staff."
+
+---
+
 
 ## 📌 ARCHIVED / COMPLETED IDEAS
 

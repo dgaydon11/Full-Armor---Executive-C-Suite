@@ -18,7 +18,7 @@ const MODEL_COSTS = {
 };
 
 // Paths to logs
-const EXECUTIVE_SUITE_DIR = 'C:\\Users\\Don1\\Desktop\\Full-Armor---Executive-C-Suite';
+const EXECUTIVE_SUITE_DIR = 'C:\\Users\\dgayd\\Desktop\\Full-Armor---Executive-C-Suite';
 const CAPA_LOG_PATH = path.join(EXECUTIVE_SUITE_DIR, 'Quality - Chief-Quality_Officer', 'yellow_light_capa_log.md');
 const CONFIG_LOG_PATH = path.join(EXECUTIVE_SUITE_DIR, 'Finance - Chief-Financial_Officer', 'token_usage_ledger.json');
 

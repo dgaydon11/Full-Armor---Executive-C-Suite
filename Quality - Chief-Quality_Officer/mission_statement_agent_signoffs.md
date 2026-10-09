@@ -1,5 +1,5 @@
 # QMS Controlled Log: Mission Statement Agent Sign-offs
-**Policy Reference:** [Mission Statement Rev C](file:///c:/Users/Don1/Desktop/Full-Armor---Executive-C-Suite/Quality%20-%20Chief-Quality_Officer/mission_statement_rev_c.md)  
+**Policy Reference:** [Mission Statement Rev C](file:///c:/Users/dgayd/Desktop/Full-Armor---Executive-C-Suite/Quality%20-%20Chief-Quality_Officer/mission_statement_rev_c.md)  
 **Status:** ACTIVE & BINDING  
 
 The C-Suite Executive Agents verify they understand and will actively enforce the Mission Statement across their respective operational pipelines.

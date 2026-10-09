@@ -10,13 +10,13 @@ This document outlines the mandatory morning routine to re-establish workspace i
 ## SECTION 1: AUTHORIZATION RECOVERY
 To handle daily IDE permission resets, the operator must grant access to the active project folders.
 1. Immediately request the operator to authorize Read and Write permissions for:
-   * `C:\Users\Don1\Desktop\Full-Armor---Executive-C-Suite`
-   * `C:\Users\Don1\Desktop\Full-Armor---Vanguard`
-   * `C:\Users\Don1\Desktop\Full-Armor---Titan`
-   * `C:\Users\Don1\Desktop\Full-Armor---Noble`
-   * `C:\Users\Don1\Desktop\Full Armor --- Sentinel`
-   * `C:\Users\Don1\Desktop\full-armor-monitoring`
-   * `C:\Users\Don1\Desktop\Full-Armor---HQ`
+   * `C:\Users\dgayd\Desktop\Full-Armor---Executive-C-Suite`
+   * `C:\Users\dgayd\Desktop\Full-Armor---Vanguard`
+   * `C:\Users\dgayd\Desktop\Full-Armor---Titan`
+   * `C:\Users\dgayd\Desktop\Full-Armor---Noble`
+   * `C:\Users\dgayd\Desktop\Full Armor --- Sentinel`
+   * `C:\Users\dgayd\Desktop\full-armor-monitoring`
+   * `C:\Users\dgayd\Desktop\Full-Armor---HQ`
 
 ---
 

@@ -1,5 +1,5 @@
 # WORK INSTRUCTION: SHAS-01 (SONIC SIGNATURE UTILITY)
-**Associated Plan:** [Fingerprint_Project_Plan.md](file:///C:/Users/Don1/Desktop/Full-Armor---Executive-C-Suite/Quality%20-%20Chief-Quality_Officer/Fingerprint_Project_Plan.md)  
+**Associated Plan:** [Fingerprint_Project_Plan.md](file:///C:/Users/dgayd/Desktop/Full-Armor---Executive-C-Suite/Quality%20-%20Chief-Quality_Officer/Fingerprint_Project_Plan.md)  
 **Security Level:** Tier 1 (C-Suite Core)  
 
 This companion readme serves as the official work instruction for compiling, executing, and testing the standalone fingerprinting utility.

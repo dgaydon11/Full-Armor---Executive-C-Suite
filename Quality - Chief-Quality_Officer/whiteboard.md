@@ -1,7 +1,7 @@
 # FULL ARMOR STUDIOS - MASTER WHITEBOARD
 **Document ID:** CQO-WHITEBOARD  
 **Owner:** Human Operator  
-**Last Updated:** 2026-10-08  
+**Last Updated:** 2026-10-11  
 
 This file serves as the master repository for brainstorming, system ideas, and future features. All automated tickets for Titan, Noble, Vanguard, Sentinel, and R&D will be derived from the ideas logged here.
 
@@ -9,24 +9,10 @@ This file serves as the master repository for brainstorming, system ideas, and f
 
 ## 💡 ACTIVE IDEAS & BACKLOG
 
-*   **P0 — Restore Vanguard Access (Portal Locked) (Ticket: CQO-CAPA-0620)**
-    *   *Pillar:* Vanguard / CTO
-    *   *Status:* Resolved / Closed (2026-10-11)
-    *   *Concept:* Operator regained full access to Vanguard Pillar in regular and incognito windows. Resolved premature unauthenticated bypass race condition in `index.html`, added SSO sync event hooks, decoupled `auth.currentUser` from pending ticket requirement in `vanguard_terminal.html`, cleaned up stale cookies on rejection in `sso.js`, and deployed live to production (`full-armor-vanguard-dacc3.web.app`).
-
 *   **Review ALL CAPA Tickets (Open & Closed) (Ticket: CQO-CAPA-1008)**
     *   *Pillar:* CQO / Quality Management System
     *   *Status:* Pending
     *   *Concept:* Full review of every ticket in the local QA Corrective Action (CAPA) system — reconcile status drift between the `capa_*.md` reports and `yellow_light_capa_log.md`, re-assess the open Vanguard auth loop (CQO-CAPA-0620), and flag stale or unowned items.
-
-*   **[DISCUSSION] Transitioning the Executive Staff into the opencode Environment**
-    *   *Pillar:* Executive C-Suite / HQ
-    *   *Status:* Discussion — Resume Here (Parked 2026-10-08, no files drafted yet)
-    *   *Concept:* Planned migration of the C-Suite Staff (currently living as chat personas in Open Web UI) into native opencode agents. **Decision:** YES — opencode supports custom agents as simple `.md` files (project `.opencode/agent/<name>.md` or global `~/.config/opencode/agent/<name>.md`), with frontmatter for `description`, `mode` (primary/subagent/all), `model`, and `permission`.
-    *   *Key Design Decision (proposed, unapproved):* Honor the governance already baked into every persona file (executives issue only "WHAT" to HQ; mandatory Human Operator sign-off; `.md` revision lock; Identity Sovereignty). Mapping: **(1) Chiefs** → `subagent`, read-only planners (`edit: deny`, `write: deny`, `bash: ask`); **(2) HQ Manager / Script Writer** → `primary`, full tools, turns directives into tasks ("HOW"); **(3) Pillar bots** (Titan/Noble/Vanguard/Sentinel) → `subagent`, the only write-capable agents. Enforce revision lock + sign-off via `permission: { edit: { "**/*.md": "ask", "*": "allow" } }` (opencode = last matching rule wins).
-    *   *Open Questions / Gotchas:* (a) Open Web UI Staff and opencode agents are separate model instances — no shared memory; the only bridge is the `__inbox__` file drop, which is a one-way Open Web UI sandbox (`webui.db` + 185 uploaded images), NOT a live message bus. (b) Hierarchy is Chief→HQ, the reverse of opencode's primary→subagent dispatch — so HQ should be `primary` and consults Chiefs as `subagent` reports. (c) Keep single source of truth: agent bodies should *Read* the existing `<x>_persona.md` at startup (like SOP-01) rather than copy persona text (avoids drift + honors the revision lock). (d) Config is not hot-reloaded — restart opencode after adding agents. (e) `agents.py` is named as the single source of truth for staff capabilities in `open_web_ui_prompt_writer.md` — verify it before building.
-    *   *Relevant Files:* all 7 `*_persona.md` under `Full-Armor---Executive-C-Suite\<Dept> - ...\`; `Open_Web_UI_Front_End\open_web_ui_prompt_writer.md`; `Quality - Chief-Quality_Officer\staff_activation_control.md`; `Full-Armor---HQ\__inbox__\`.
-    *   *Next Step When Resumed:* Decide scope — start with a proof-of-concept (`/good-morning` + CQO/Veritas since she leads) vs. full 7-Chief + HQ + Pillar set — then draft the agent `.md` files and restart opencode.
 
 *   **Reaper DAW Automation & Lossless Compliance Pipeline (Ecosystem)**
     *   *Pillar:* R&D / Audio
@@ -73,16 +59,27 @@ This file serves as the master repository for brainstorming, system ideas, and f
     *   *Status:* Proposed/Planned
     *   *Concept:* Develop promotional copy and landing page layouts targeting home DAW producers. Highlight our unique combination of 3D visualizers, automated digital signature notarization, active web crawling detection, and automated government copyright filing (emphasizing the $150,000 statutory damages protection).
 
+*   **Vanguard Experience Verification System (HIGH PRIORITY)**
+    *   *Pillar:* Vanguard
+    *   *Status:* Proposed/Planned - High Priority
+    *   *Concept:* Replace the current symbolic "I Agree" voice capture in the Vanguard gateway (`index.html`) with a proper experience verification system.
+    *   *Required Implementation:*
+      *   Replace the two-step "I Agree" mic flow with a structured experience questionnaire (prompt: "Tell us about your DAW experience — which DAWs have you used, how long, and on what projects?")
+      *   Capture spoken response via Web Audio API with start/stop controls and audio preview
+      *   Validate minimum requirements (must mention at least one recognized DAW: Pro Tools, Logic Pro, Ableton Live, Studio One, Reaper, Cubase, FL Studio, Nuendo, etc.)
+      *   Implement automatic keyword-based evaluation with configurable threshold; route to "pending review" if inconclusive
+      *   Store audio at `vanguard_verifications/{uid}/experience.wav` and metadata/transcript in Firestore at `vanguard_experience_verifications/{uid}` (status: pending/approved/rejected, reason, timestamps, evaluator)
+      *   Gate redirect to `vanguard_terminal.html` — only allow if approved (or mission already accepted); show pending/rejected states in UI
+      *   Update `platform_configuration/vanguard_gateway` copy for new prompts/instructions
+      *   Add optional Cloud Function for speech-to-text + scoring (Gemini/Whisper) behind feature flag
+      *   Preserve existing SSO/auth flow and mission bypass logic
 
 ---
 
+
+
 ## 🚧 LOOSE ENDS & OPERATIONAL STATE
 *As of 2026-10-08 EOD. Captured so tomorrow's session resumes cleanly — these are discovered defects / pending state, NOT yet ticketed in the CAPA system (triage → CQO-CAPA when resumed).*
-
-*   **Vanguard — Today's Fixes NOT Yet Committed/Deployed.**
-    *   *Pillar:* Vanguard / CTO
-    *   *Status:* RESOLVED & DEPLOYED (2026-10-11)
-    *   *Detail:* CP1252 mojibake/BOM cleanup and SSO race fixes committed (`540005e`) and deployed to production hosting at `full-armor-vanguard-dacc3.web.app`. Tested and verified operational.
 
 *   **Full-Armor Folder-Root Path Defects (SOP-01 & inbox).**
     *   *Pillar:* HQ / CQO
@@ -104,20 +101,47 @@ This file serves as the master repository for brainstorming, system ideas, and f
     *   *Status:* Pending decision
     *   *Detail:* 7 MB file predating the WAV uploads. Confirm whether to keep, rename, or remove.
 
-*   **Ops Note — gcloud / gsutil Auth Workaround (NOT a bug to fix blindly).**
-    *   *Pillar:* HQ
-    *   *Status:* Documented
-    *   *Detail:* gcloud holds the wrong account (`don.gaydon@dgcustomphotography.com`) and cannot refresh non-interactively. Correct account is `dgaydon11@gmail.com`. Workaround: mint an access token from the Firebase CLI refresh token in `~/.config/configstore/firebase-tools.json`, set `$env:CLOUDSDK_AUTH_ACCESS_TOKEN`, then run `gcloud storage ...` (token ~1h).
-
-*   **Morning Routine — Register the new `/good-morning` command.**
+*   **Morning Routine — Register the new `/good-morning` command & Veritas agent.**
     *   *Pillar:* HQ / CQO
     *   *Status:* Pending restart
-    *   *Detail:* The new global command (`~/.config/opencode/command/good-morning.md`) only appears after an opencode restart. Until then, trigger the routine by saying "Good morning staff."
+    *   *Detail:* The global command (`~/.config/opencode/command/good-morning.md`) and the project agent `.opencode\agent\cqo.md` (Veritas) load only after an opencode restart. Until then, trigger the routine by saying "Good morning staff." After restart: press `Tab` → Veritas, then `/good-morning`.
 
 ---
 
 
 ## 📌 ARCHIVED / COMPLETED IDEAS
+
+*   **Transitioning the Executive Staff into the opencode Environment**
+    *   *Pillar:* Executive C-Suite / HQ
+    *   *Status:* Resolved (2026-10-11) — Final scope: **CQO/Veritas only**
+    *   *Outcome:* The only Executive Staff member to live natively in opencode is the **CQO (Veritas)**; **Cairn (CCO)** is already opencode-native. All other staff (remaining Chiefs, HQ Manager/Script Writer, Pillar bots) remain in Open Web UI and will **not** be migrated. The earlier "full 7-Chief + HQ + Pillars" mapping is therefore moot.
+    *   *Delivered (2026-10-11):* Project agent `.opencode\agent\cqo.md` (`mode: primary`, `permission: { edit: deny, bash: ask }`) that reads `cqo_persona.md` + `staff_activation_control.md` at startup — the persona file stays the single source of truth, no persona text copied. Wired the global `/good-morning` command to it via `agent: cqo`. Takes effect on the next opencode restart.
+    *   *Retained Learnings:* (a) OWUI staff and opencode agents are separate model instances with no shared memory; the only bridge is the one-way `__inbox__` file drop. (b) Agent bodies should *Read* the `<x>_persona.md` at startup rather than copy persona text (avoids drift, honors the revision lock). (c) opencode config is not hot-reloaded — restart after adding agents. (d) `agents.py` is retired; persona `.md` files are the single source of truth.
+
+*   **Review Archived `agents.py` for Value**
+    *   *Pillar:* HQ / CTO
+    *   *Status:* Completed (2026-10-11) — Decision: **Retire**
+    *   *Concept:* Reviewed `Full-Armor---HQ\__ARCHIVE__\agents.py` (CrewAI `Agent` on local `ollama/qwen3-coder:30b`, tools via `body_toolbox.get_drawer`, loads the Titan programming-engineer persona). Determined it is a superseded single-agent prototype: its successor pattern is the per-pillar `persona_mind_body_nerveous_system\nervous_system.py` factory, and the current architecture keeps the `*_persona.md` files as the single source of truth. Formally **retired** — stays in `__ARCHIVE__`, not revived. Corrected the stale "agents.py = single source of truth" claims in `Open_Web_UI_Front_End\open_web_ui_prompt_writer.md` (line 65) and `Full-Armor---HQ\full_armor_structure.md` (line 47) to point to the persona `.md` files.
+
+*   **Inbox Relay — Auto-Capture & Review Staff Drops from the OWUI Sandbox**
+    *   *Pillar:* HQ / CQO
+    *   *Status:* Completed (2026-10-11)
+    *   *Concept:* Built the file bridge between the Open Web UI sandbox and opencode. `__inbox__` now has `active\` (awaiting review) and `inactive\` (reviewed/archived); OWUI infra (`cache\`, `uploads\`, `vector_db\`, `webui.db*`) is ignored. New tool at `Full-Armor---HQ\__inbox_relay__\`: `inbox_relay.py`, a pure-stdlib 4s polling watcher that routes new drops into `active\`, maintains `_mailbox.json` state + a `_mailbox.md` index, and raises a native Windows toast on arrival; plus `start_inbox_relay.ps1` / `stop_inbox_relay.ps1`. New `/check-inbox` command lists/summarizes active mail and offers Act / Promote / Archive / Ignore; `/good-morning` (SOP-01) now auto-scans the mailbox. Review-first — dropped code is never auto-executed. Started resident 2026-10-11 (14 existing drops routed to `active\`).
+
+*   **P0 — Restore Vanguard Access (Portal Locked) (Ticket: CQO-CAPA-0620)**
+    *   *Pillar:* Vanguard / CTO
+    *   *Status:* Closed (2026-10-11)
+    *   *Concept:* Operator regained full access to Vanguard Pillar in regular and incognito windows. Resolved premature unauthenticated bypass race condition in `index.html`, added SSO sync event hooks, decoupled `auth.currentUser` from pending ticket requirement in `vanguard_terminal.html`, cleaned up stale cookies on rejection in `sso.js`, and deployed live to production (`full-armor-vanguard-dacc3.web.app`).
+
+*   **Vanguard Fixes — CP1252/SSO Race Commit & Deploy.**
+    *   *Pillar:* Vanguard / CTO
+    *   *Status:* Closed (2026-10-11)
+    *   *Concept:* CP1252 mojibake/BOM cleanup and SSO race fixes committed (`540005e`) and deployed to production hosting at `full-armor-vanguard-dacc3.web.app`. Tested and verified operational.
+
+*   **Retire Deprecated Google Account (`don.gaydon@dgcustomphotography.com`)**
+    *   *Pillar:* HQ / CQO
+    *   *Status:* Closed (2026-10-11)
+    *   *Concept:* Ensure the deprecated Google account is never used by live code or tooling, so nothing can "jump back" to it. Revoked its gcloud authorization (`gcloud auth revoke`); confirmed `gcloud auth list` and `firebase login:list` now resolve solely to `dgaydon11@gmail.com`. Vacuumed the gcloud credential/token SQLite stores and cleared gcloud logs so no residue remained. Verified no project code/config (`.firebaserc`, `firebase.json`, `.env`, service-account keys, `sso.js`) references the old account. Historical git commit metadata was intentionally left unchanged (inert; does not affect account selection).
 
 *   **Customer 2FA/MFA Strategy Discussion**
     *   *Pillar:* Security / CISO / Product

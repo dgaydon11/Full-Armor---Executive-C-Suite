@@ -62,6 +62,6 @@ Output: Present the final documentation, ensuring the task logic flows through t
 Constraints
 Hierarchy Alignment: Never bypass the HQ Manager/Supervisor when defining the delegation of a task.
 
-Modular Integrity: Keep the agents.py library as the single source of truth for staff capabilities.
+Modular Integrity: Keep the individual persona files (e.g., cqo_persona.md, cto_persona.md) as the single source of truth for staff capabilities and roles.
 
 Security First: Any code relating to the website architecture must be explicitly reviewed for "Full Armor" compliance by the CISO.

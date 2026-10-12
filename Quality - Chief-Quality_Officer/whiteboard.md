@@ -11,8 +11,8 @@ This file serves as the master repository for brainstorming, system ideas, and f
 
 *   **P0 — Restore Vanguard Access (Portal Locked) (Ticket: CQO-CAPA-0620)**
     *   *Pillar:* Vanguard / CTO
-    *   *Status:* Tomorrow AM — Priority
-    *   *Concept:* Operator must regain access to the Vanguard Pillar ASAP (Google sign-in fails with `auth/internal-error` + redirect loop). First action of the morning: run the CAPA-0620 diagnostics (browser Network tab for `CONFIGURATION_NOT_FOUND` / `OPERATION_NOT_ALLOWED` / `API_KEY_HTTP_REFERRER_BLOCKED`; verify Google provider Enabled and the authorized domains in the Firebase Console), then apply the 5S auth-routing cleanup and validate in the emulator before deploying.
+    *   *Status:* Resolved / Closed (2026-10-11)
+    *   *Concept:* Operator regained full access to Vanguard Pillar in regular and incognito windows. Resolved premature unauthenticated bypass race condition in `index.html`, added SSO sync event hooks, decoupled `auth.currentUser` from pending ticket requirement in `vanguard_terminal.html`, cleaned up stale cookies on rejection in `sso.js`, and deployed live to production (`full-armor-vanguard-dacc3.web.app`).
 
 *   **Review ALL CAPA Tickets (Open & Closed) (Ticket: CQO-CAPA-1008)**
     *   *Pillar:* CQO / Quality Management System
@@ -81,8 +81,8 @@ This file serves as the master repository for brainstorming, system ideas, and f
 
 *   **Vanguard — Today's Fixes NOT Yet Committed/Deployed.**
     *   *Pillar:* Vanguard / CTO
-    *   *Status:* Uncommitted (pairs with P0 / CQO-CAPA-0620)
-    *   *Detail:* CP1252 mojibake + BOM cleanup in `index.html`, `vanguard_terminal.html`, `guitar_interior.html`, and the broken-JS repair at `index.html:289` are saved but not committed. Verify in the emulator, then commit + deploy.
+    *   *Status:* RESOLVED & DEPLOYED (2026-10-11)
+    *   *Detail:* CP1252 mojibake/BOM cleanup and SSO race fixes committed (`540005e`) and deployed to production hosting at `full-armor-vanguard-dacc3.web.app`. Tested and verified operational.
 
 *   **Full-Armor Folder-Root Path Defects (SOP-01 & inbox).**
     *   *Pillar:* HQ / CQO

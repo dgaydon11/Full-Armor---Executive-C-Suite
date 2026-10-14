@@ -1,7 +1,7 @@
 # FULL ARMOR STUDIOS - MASTER WHITEBOARD
 **Document ID:** CQO-WHITEBOARD  
 **Owner:** Human Operator  
-**Last Updated:** 2026-10-11  
+**Last Updated:** 2026-10-13  
 
 This file serves as the master repository for brainstorming, system ideas, and future features. All automated tickets for Titan, Noble, Vanguard, Sentinel, and R&D will be derived from the ideas logged here.
 
@@ -81,6 +81,19 @@ This file serves as the master repository for brainstorming, system ideas, and f
 ## 🚧 LOOSE ENDS & OPERATIONAL STATE
 *As of 2026-10-08 EOD. Captured so tomorrow's session resumes cleanly — these are discovered defects / pending state, NOT yet ticketed in the CAPA system (triage → CQO-CAPA when resumed).*
 
+*   **Cairn Voice Bridge — Health Watch (monitor for a few days).**
+    *   *Pillar:* HQ / Voice Bridge
+    *   *Status:* Monitoring — started 2026-10-13
+    *   *Reference:* `Full-Armor---HQ\CELL PHONE COMM BRIDGE (Cairn Voice)\CAIRN_VOICE_BRIDGE.md`
+    *   *Detail:* After repointing the phone bridge to local Ollama (`qwen2.5-coder:14b-instruct`), watch stability over the next few days. Once daily, run the health check and a live test; confirm the relay + OpenCode server are up with no quota / `RESOURCE_EXHAUSTED` errors. Log one row per day in the check log.
+    *   *Daily checks:*
+      *   Health — `Invoke-RestMethod http://127.0.0.1:8787/api/health` → expect `provider: ollama`, `model: qwen2.5-coder:14b-instruct`, relay + opencode up.
+      *   Live — POST `/api/message` (see the reference doc's "Live test message" block) → expect a correct **Cairn**-persona reply, no 429.
+    *   *Check log:*
+      | Date | Relay | OpenCode | Live test | Notes |
+      | --- | --- | --- | --- | --- |
+      | 2026-10-13 | up | up | pass (warm ~1.2s) | Initial switch to Ollama verified |
+
 *   **Full-Armor Folder-Root Path Defects (SOP-01 & inbox).**
     *   *Pillar:* HQ / CQO
     *   *Status:* Open
@@ -110,6 +123,21 @@ This file serves as the master repository for brainstorming, system ideas, and f
 
 
 ## 📌 ARCHIVED / COMPLETED IDEAS
+
+*   **Personal Calendar (Local GUI + Data)**
+    *   *Pillar:* HQ / Personal Ops
+    *   *Status:* Completed (2026-10-13)
+    *   *Concept:* Local Tkinter month-grid calendar (`Full-Armor---HQ\local_calendar.py`) with a US-holiday overlay (via the `holidays` package, preloaded ±5/10 years) and click-to-add events persisted to `local_calendar_data.json`. Delivered with `start_calendar.ps1` (runs the HQ `.venv` pythonw), a Desktop shortcut "Full Armor Calendar", and a global `/calendar` opencode command. Verified running.
+
+*   **Cairn Voice Bridge — Repointed to Local Ollama (Quota-Free)**
+    *   *Pillar:* HQ / Voice Bridge
+    *   *Status:* Completed (2026-10-13) — under multi-day monitoring
+    *   *Concept:* The phone voice bridge was failing with Google Gemini free-tier `429 RESOURCE_EXHAUSTED` (250 req/day per model). Repointed the relay to `provider: ollama`, `model: qwen2.5-coder:14b-instruct` and added an `ollama` provider (6 local models) to `~/.config/opencode/opencode.jsonc`. Cleared a stale OpenCode server holding port 4096. Verified end-to-end: relay (8787) → OpenCode server (4096) → local Ollama (11434), correct Cairn persona, ~1.2s warm, no quota. Documented in `...\CELL PHONE COMM BRIDGE (Cairn Voice)\CAIRN_VOICE_BRIDGE.md` (linked from all agent/persona files); daily health watch tracked in LOOSE ENDS.
+
+*   **Personal Daily Briefing**
+    *   *Pillar:* HQ / Personal Ops
+    *   *Status:* Completed (2026-10-13)
+    *   *Concept:* `Full-Armor---HQ\Personal_Briefing.py` generates `Personal_Briefing.md` containing, in order: today's calendar events (read from `local_calendar_data.json`), a rental-property reminder, Hesperia/Chino weather (wttr.in), the Hesperia→Chino commute (OSRM), US + World headlines (Google News RSS), and upcoming SpaceX Starship status (The Space Devs API). Verified live end-to-end.
 
 *   **Transitioning the Executive Staff into the opencode Environment**
     *   *Pillar:* Executive C-Suite / HQ

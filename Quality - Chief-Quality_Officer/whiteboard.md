@@ -1,13 +1,58 @@
 # FULL ARMOR STUDIOS - MASTER WHITEBOARD
 **Document ID:** CQO-WHITEBOARD  
 **Owner:** Human Operator  
-**Last Updated:** 2026-10-13  
+**Last Updated:** 2026-10-15  
 
 This file serves as the master repository for brainstorming, system ideas, and future features. All automated tickets for Titan, Noble, Vanguard, Sentinel, and R&D will be derived from the ideas logged here.
 
 ---
 
 ## 💡 ACTIVE IDEAS & BACKLOG
+
+*   **Desktop TTS Pipeline — Speak OpenCode Replies Aloud (Cairn Voice, Desktop)**
+    *   *Pillar:* HQ / Voice Bridge / CCO
+    *   *Status:* WORKING (2026-10-14) — speaking live through the **monitor speakers**. Playback hand-off to the DAW rig is still pending.
+    *   *Concept:* Have the desktop read opencode chat replies out loud, matching the phone bridge's text-to-speech. The phone PWA speaks replies client-side via the browser Web Speech API (`speechSynthesis` in `public/app.js`); the desktop has no browser, so we reproduce the effect with an opencode plugin that hooks `session.idle`, extracts the last assistant message, strips code/URLs, and voices natural prose.
+    *   *Decisions (locked 2026-10-14):* Global plugin at `~/.config/opencode/plugins/speak-replies.js`; **Phase 1 = Windows SAPI** (verify the hook), then **Phase 2 = edge-tts `en-GB-RyanNeural`** to match the Edinburgh voice; read every reply by default with a toggle/flag-file to mute; strip code blocks / inline code / raw URLs; new reply interrupts the previous utterance.
+    *   *Built (2026-10-14):*
+        *   Phase 1 — plugin `~/.config/opencode/plugins/speak-replies.js` (global, **verified loading live** — logs `initialised; engine=edge ...`). Hooks `session.idle`, fetches the last assistant message via `client.session.messages`, skips sub-agent sessions (`parentID`) and compaction summaries, strips code/URLs/markdown/emoji, then speaks. A newer reply interrupts the previous; mute via flag file. Helper `~/.config/opencode/tts/sapi.ps1`; config `~/.config/opencode/tts/config.json`.
+        *   Phase 2 — resident helper `Full-Armor---HQ/desktop_tts/tts_server.py` (stdlib HTTP on `127.0.0.1:8788`; edge-tts `en-GB-RyanNeural` -> temp MP3 -> **Media Foundation decode to PCM WAV** -> winmm `PlaySound`, interruption-aware). The plugin posts text to it and it owns playback (no automatic SAPI fallback — see 2026-10-15 defect below).
+        *   Scripts (HQ `desktop_tts/`): `start_tts_server.ps1`, `stop_tts_server.ps1`, `toggle_tts.ps1`, `mp3_to_wav.ps1` (Media Foundation MP3->WAV decoder). Mute = flag file `~/.config/opencode/tts/muted`.
+    *   *Playback finding (2026-10-14) — why the WAV detour exists:* edge-tts only emits MP3, but on this machine the default output is the **monitor's HDMI endpoint**, where MP3 playback is **silent** via both MCI `mpegvideo` and `WMPlayer.OCX`; only winmm `PlaySound` (WAV) is audible. So each clip is decoded MP3->WAV in-process by Windows Media Foundation (no ffmpeg/mpv required). **Do not "simplify" this back to direct MP3 playback — it goes silent again.**
+    *   *Verified (2026-10-14):* plugin loads + fires on `session.idle`; `edge-tts` synthesis OK; helper `/health` 200 and `/speak` 200 (audible voice on the monitor); SAPI fallback speaks (exit 0); text filter 6/6 unit cases pass; newer reply interrupts the previous clip.
+    *   **DEFECT + FIX (2026-10-15) — two voices at once (Cairn's edge voice + a robotic voice) on the DESKTOP.**
+        *   *Symptom:* two voices play simultaneously through the monitor speakers — Cairn's Edinburgh voice (edge-tts WAV) plus a robotic voice.
+        *   *Root cause (NOT a device change, NOT concurrent wav+mp3):* the plugin posted the reply to the helper, then a **15-second abort timer** fired while edge-tts was still synthesising (long replies take 17–65s). The timeout was treated as "helper unreachable" and the plugin **fell back to Windows SAPI** (the robotic voice). The helper, unaware the client hung up, finished synthesising and **played its WAV anyway**. Both hit the same default device → two voices. A newer reply superseding an in-flight request triggered the identical abort→SAPI path.
+        *   *Evidence:* `opencode.log` WARN `edge helper unavailable, falling back to SAPI: The operation was aborted.` (5 occurrences 2026-10-15) lines up 15s before the helper's long-synthesis log lines; helper `tts_server.err.log` shows matching `ConnectionResetError` (the aborted requests).
+        *   *Fix:* `~/.config/opencode/plugins/speak-replies.js` — **removed the automatic SAPI fallback for engine `edge`.** On abort/timeout or helper-unreachable the plugin now stays silent (the helper owns playback); SAPI only runs if explicitly configured (`engine: "sapi"`). Also raised the abort timeout **15s → 120s** so a slow-but-healthy synthesis is not mistaken for a dead helper. `node --check` passes.
+        *   *Status:* **VERIFIED LIVE 2026-10-15** — restart 09:53 loaded the fix (`initialised; engine=edge helperUrl=...8788 muted=false`, run `20013b91`); zero SAPI-fallback WARNs since restart; operator confirmed **one voice only** (Cairn edge voice, no robotic double). Defect closed.
+        *   *Open decision for operator:* on a genuine helper outage the desired behaviour is now **silence** (only Cairn's voice ever plays). If a spoken fallback is ever wanted instead, it is a one-line config change.
+    *   *Roadmap — playback device:*
+        *   **Phase A (current):** monitor speakers (Sceptre L24 / NVIDIA HDMI). Working.
+        *   **Phase B (next) — DECISION LOCKED 2026-10-14, option (a):** make the **Steinberg audio interface the Windows default output** and let winmm `PlaySound` follow it — **no helper code changes**. Then monitor.
+    *   *Roadmap — voice input:*
+        *   **Phase C (after Phase B) — DECISION LOCKED 2026-10-14:** set up a **professional microphone** plus a **helper that types the transcript into opencode** (synthetic keystrokes), so the operator can *speak prompts* to Cairn. Chosen over the "transcript file + `/voice-prompt` command" route (safer, but less seamless).
+    *   ***RESUME HERE (paused 2026-10-14) — resume point for the next session.***
+        *   **Phase B — do this next:**
+            *   Operator connects the Steinberg interface + surround rig; confirm **Windows enumerates the device** (last check, the only active render endpoints were the monitor + Realtek Digital; the Steinberg showed as *not present*).
+            *   Set the Steinberg as the Windows default output (manual: Settings > Sound > Output, or the classic Sound Control Panel). **Cairn does not change system audio settings unasked.**
+            *   `PlaySound` follows the default automatically — verify a reply is audible on the surround rig.
+            *   **Monitor checklist:** (1) audible at all; (2) correct channels — mono clip should land on the front pair, not buried in centre/rear; (3) no grit from the 24 kHz -> 48 kHz resample (first suspect if it sounds rough); (4) no silent failure when the device is off/absent; (5) no conflict with Cubase holding the interface in ASIO/exclusive mode — test with the DAW closed and open.
+            *   If it holds -> Phase B done. If it goes silent -> capture the default-device state first (a Core Audio device/volume reader was already used for diagnosis).
+        *   **Phase C — design locked, build later:**
+            *   Pipeline: global push-to-talk hotkey (`RegisterHotKey`) -> record mic/interface input -> speech-to-text -> inject transcript into opencode as keystrokes.
+            *   Injection: Win32 `SendInput` (Unicode key events) **or** clipboard + `Ctrl+V` (more robust for long/symbol-heavy text; briefly borrows the clipboard).
+            *   **Safety rule (agreed):** inject only when the target window is the **verified foreground window**; otherwise fall back to clipboard + a toast ("prompt ready, Ctrl+V") rather than typing blind.
+            *   Default to **review-first** (helper types; operator presses Enter) — an STT error must not auto-send a wrong prompt to an agent with write/bash access.
+            *   Needs a mic-capture library (PortAudio-bound, e.g. `sounddevice`) and an STT engine (local Whisper fits the offline ethos; one-time model download; NVIDIA GPU available).
+        *   **Phase C — OPEN QUESTIONS (answer before building):**
+            1. Which terminal hosts opencode (Windows Terminal, or other)? Needed to target the window reliably.
+            2. Review-first or auto-send?
+            3. Which global hotkey — and does Cubase / the interface drivers already own it?
+            4. STT: is local Whisper acceptable (model download + GPU use)?
+        *   **Resolved (2026-10-15):** the "two `tts_server.py` helpers on 8788" was a **misread of one server, not two.** The venv `python.exe` is a *redirector*: it spawns the base system interpreter (system Python 3.12) as a child and hands it the venv's site-packages, so two Python PIDs appear (venv launcher + child) but there is a **single `Listen` socket** (verified: only one `127.0.0.1:8788 LISTENING`, owned by the child). One source of truth; no action needed.
+        *   **Open operational item (decide):** register a logon scheduled task so the helper auto-starts with the machine.
+        *   **Repo hygiene:** `Full-Armor---HQ/desktop_tts/` is **untracked in git** (no history to roll back to) — consider committing once the rig is stable.
 
 *   **Review ALL CAPA Tickets (Open & Closed) (Ticket: CQO-CAPA-1008)**
     *   *Pillar:* CQO / Quality Management System
@@ -93,6 +138,7 @@ This file serves as the master repository for brainstorming, system ideas, and f
       | Date | Relay | OpenCode | Live test | Notes |
       | --- | --- | --- | --- | --- |
       | 2026-10-13 | up | up | pass (warm ~1.2s) | Initial switch to Ollama verified |
+| 2026-10-14 | up | up | pass (warm ~1.3s) | Day 2 health watch — no quota errors |
 
 *   **Full-Armor Folder-Root Path Defects (SOP-01 & inbox).**
     *   *Pillar:* HQ / CQO

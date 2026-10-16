@@ -9,6 +9,20 @@ This file serves as the master repository for brainstorming, system ideas, and f
 
 ## 💡 ACTIVE IDEAS & BACKLOG
 
+*   **Robin's Personal Files — Vault Setup (Personal Ops)**
+    *   *Pillar:* HQ / Personal Ops
+    *   *Status:* In Progress (2026-10-15)
+    *   *Concept:* Create a personal vault for Robin (Don's wife), parallel to `personal\don\`, at `Full-Armor---HQ\personal\robin\`, and populate it with subdirectories for her personal files.
+    *   *Created (2026-10-15):* `personal\robin\` with subdirectories: `Robin's Daily Briefing`, `Robin's Shopping list`, `Robin's Medical File`, `Robin's Calendar`, `Robin's Medications`.
+    *   *Robin's Calendar — EDITABLE (2026-10-15):* Seeded `personal\robin\Robin's Calendar\local_calendar_data.json` with a copy of Don's calendar. Parameterized `local_calendar.py` with a `--user` flag (`don` | `robin`); each user's data path is mapped in a `USERS` dict (Don: `personal\don\local_calendar_data.json`; Robin: `personal\robin\Robin's Calendar\local_calendar_data.json`). Added `start_robin_calendar.ps1` and a Desktop shortcut "Robin's Calendar" (`--user robin`); Don's launcher/shortcut now pass `--user don` explicitly. `load_events`/`save_events` auto-create the data dir. Verified: `py_compile` OK, path resolution for both users correct, GUI smoke test (Robin) launched + closed cleanly.
+    *   *Robin's Calendar — CLEANED (2026-10-15):* Removed Don's work/misc events from Robin's copy (kept birthdays + stored holiday entries only). Robin's calendar now holds: Alec's Birthday (10-06), Mom Diamond's Birthday (10-12), Halloween (10-31), Thanksgiving Double Check (11-26), Wife's Birthday (12-06). Holidays still render dynamically via the overlay. Don's calendar untouched (15 entries).
+    *   *Follow-ons (pending):* populate Robin's other content (briefing, shopping list); decide whether she gets her own briefing tooling mirroring Don's.
+    *   *Robin's Shopping List — CREATED (2026-10-15):* Added `personal\robin\Robin's Shopping list\robin_shopping_list.md` (empty, same markdown-checkbox format as `don_shopping_list.md`) so Robin can maintain her own list. No tooling reads the list (plain markdown), so no code changes needed.
+    *   *Robin's Morning Briefing — CREATED (2026-10-15):* Parameterized `Personal_Briefing.py` with a `--user` flag (`don` | `robin`); a `USERS` dict maps calendar (read) + briefing (write) paths (Robin reads `personal\robin\Robin's Calendar\local_calendar_data.json`, writes `personal\robin\Robin's Daily Briefing\Personal_Briefing.md`). All briefing sections retained unchanged ("keep everything for now"): calendar, rental reminder, exercise, Walmart, weather (Hesperia/Chino), commute, US/World news, SpaceX. Added `start_robin_briefing.ps1` + Desktop shortcut "Robin's Morning Briefing". Verified: `py_compile` OK, per-user path resolution correct, live run wrote Robin's briefing (exit 0). Don's briefing untouched.
+    *   *Robin's Briefing — TAILORED (2026-10-15):* Added per-user `sections` + `cities` config to `Personal_Briefing.py`. Robin's briefing now omits the rental-property reminder, Walmart order, Chino weather, the Hesperia→Chino commute, US news, and SpaceX Starship — she gets: calendar, daily exercise, Hesperia weather, World news. Don's config unchanged (all sections). Verified live (exit 0) + per-user section resolution.
+    *   *Robin's Briefing — REMINDERS ADDED (2026-10-15):* New Robin-only **✅ Reminders** section (after the calendar): take blood-pressure medication, start a load of laundry, start the dishwasher, add items to the shopping list. Gated by a new `reminders` section key; Don unaffected.
+    *   *Robin's Briefing — LA CHARGERS ADDED (2026-10-15):* New Robin-only **🏈 LA Chargers** section (after weather): current **record** + **next game** (ESPN public site API `site.api.espn.com/.../teams/lac`) and **team news** (Google News RSS query). Next-game time is converted to Pacific (`zoneinfo America/Los_Angeles`). Gated by a new `chargers` section key; Don unaffected. Verified live (record 0-5, next: at KC Sun Oct 18 1:25 PM PDT, 5 news items).
+
 *   **Desktop TTS Pipeline — Speak OpenCode Replies Aloud (Cairn Voice, Desktop)**
     *   *Pillar:* HQ / Voice Bridge / CCO
     *   *Status:* WORKING (2026-10-14) — speaking live through the **monitor speakers**. Playback hand-off to the DAW rig is still pending.
@@ -170,10 +184,25 @@ This file serves as the master repository for brainstorming, system ideas, and f
 
 ## 📌 ARCHIVED / COMPLETED IDEAS
 
+*   **Multi-User Voice Bridge Routing (Don default + Robin)**
+    *   *Pillar:* HQ / Voice Bridge
+    *   *Status:* Completed (2026-10-15)
+    *   *Concept:* Made the phone voice bridge multi-user. Don is the automatic default; the PWA accepts `?user=<id>`, persists it (`cairn_user`), and sends it on every call. The relay validates it against an allowlist (`don`, `robin`; unknown → HTTP 400), hard-namespaces conversations (`user:conversationId`, stripping any client-supplied known-user prefix so nobody can spoof another user's session), and tags each message `[acting-user: <id>]`. Personal I/O routes to the acting user's vault `Full-Armor---HQ\personal\<user>\`. Policy added to the global `AGENTS.md` + `cairn_persona.md` §8. Source and LIVE bridge copies kept byte-identical; `node --check` + JSON parse OK. LIVE relay restarted (task `CairnVoiceRelay`, PID 20540, health ok) and live-tested (`user=eve`→400, `robin`/default→fresh scoped sessions). Committed + pushed (`b4acee4`, `d79044c`, `a84f03d`). *Caveat:* Don's old `chat:main` history is now `chat:don:main` → his `main` conversation starts fresh once.
+
+*   **Personal Vault Consolidation — `personal/don/`**
+    *   *Pillar:* HQ / Personal Ops
+    *   *Status:* Completed (2026-10-15)
+    *   *Concept:* Consolidated Don's scattered personal files into the canonical vault `Full-Armor---HQ\personal\don\`. Moved `local_calendar_data.json`, `Personal_Briefing.md`, and `don_shopping_list.md` out of the legacy `Don's personal files\` folder (then removed it) and deleted the stale root pointer stubs. Repointed `local_calendar.py` (`DATA_FILE`) and `Personal_Briefing.py` (read + write) plus the `/good-morning` command to the new vault; updated `cairn_persona.md` §8 + global `AGENTS.md`. Verified: `py_compile` OK and a live briefing run read the calendar and wrote `personal\don\Personal_Briefing.md` (exit 0). Committed + pushed (`59dc732`).
+
+*   **Desktop TTS Two-Voice Defect — Fixed & Verified**
+    *   *Pillar:* HQ / Voice Bridge / CCO
+    *   *Status:* Completed (2026-10-15)
+    *   *Concept:* The desktop read-aloud defect (Cairn's edge voice + a robotic voice playing at once) was root-caused to the plugin's 15s abort timer firing mid-synthesis, triggering a SAPI fallback while the helper still played its WAV. Fixed in `~/.config/opencode/plugins/speak-replies.js` (removed the automatic SAPI fallback for `engine: edge`, raised the abort timeout 15s → 120s). Reloaded live at 09:53 (run `20013b91`), zero fallback WARNs since; operator confirmed one voice only. Full detail under the Desktop TTS Pipeline entry above.
+
 *   **Personal Calendar (Local GUI + Data)**
     *   *Pillar:* HQ / Personal Ops
     *   *Status:* Completed (2026-10-13)
-    *   *Concept:* Local Tkinter month-grid calendar (`Full-Armor---HQ\local_calendar.py`) with a US-holiday overlay (via the `holidays` package, preloaded ±5/10 years) and click-to-add events persisted to `local_calendar_data.json`. Delivered with `start_calendar.ps1` (runs the HQ `.venv` pythonw), a Desktop shortcut "Full Armor Calendar", and a global `/calendar` opencode command. Verified running.
+    *   *Concept:* Local Tkinter month-grid calendar (`Full-Armor---HQ\local_calendar.py`) with a US-holiday overlay (via the `holidays` package, preloaded ±5/10 years) and click-to-add events persisted to `personal\don\local_calendar_data.json`. Delivered with `start_calendar.ps1` (runs the HQ `.venv` pythonw), a Desktop shortcut "Full Armor Calendar", and a global `/calendar` opencode command. Verified running.
 
 *   **Cairn Voice Bridge — Repointed to Local Ollama (Quota-Free)**
     *   *Pillar:* HQ / Voice Bridge
@@ -183,7 +212,7 @@ This file serves as the master repository for brainstorming, system ideas, and f
 *   **Personal Daily Briefing**
     *   *Pillar:* HQ / Personal Ops
     *   *Status:* Completed (2026-10-13)
-    *   *Concept:* `Full-Armor---HQ\Personal_Briefing.py` generates `Personal_Briefing.md` containing, in order: today's calendar events (read from `local_calendar_data.json`), a rental-property reminder, Hesperia/Chino weather (wttr.in), the Hesperia→Chino commute (OSRM), US + World headlines (Google News RSS), and upcoming SpaceX Starship status (The Space Devs API). Verified live end-to-end.
+    *   *Concept:* `Full-Armor---HQ\Personal_Briefing.py` generates `personal\don\Personal_Briefing.md` containing, in order: today's calendar events (read from `personal\don\local_calendar_data.json`), a rental-property reminder, Hesperia/Chino weather (wttr.in), the Hesperia→Chino commute (OSRM), US + World headlines (Google News RSS), and upcoming SpaceX Starship status (The Space Devs API). Verified live end-to-end.
 
 *   **Transitioning the Executive Staff into the opencode Environment**
     *   *Pillar:* Executive C-Suite / HQ
